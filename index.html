@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Português+ | Lições de Português Graduadas por Nível</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F2EA;
+    --paper-raised:#FCFAF5;
+    --ink:#25211B;
+    --ink-soft:#5B5548;
+    --line:#DCD3C0;
+    --pine:#2C5F4F;
+    --pine-dark:#1E463A;
+    --rust:#C1502E;
+    --ochre:#B4791F;
+    --slate:#3D5A73;
+    --radius:10px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Public Sans',system-ui,sans-serif;font-size:16px;line-height:1.5}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;color:var(--ink);margin:0}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer}
+  .skip-link{position:absolute;left:-9999px;background:var(--ink);color:#fff;padding:10px 16px;z-index:100}
+  .skip-link:focus{left:12px;top:12px}
+
+  /* header */
+  header{position:sticky;top:0;z-index:20;background:color-mix(in srgb, var(--paper) 92%, transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  .header-inner{max-width:1280px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .wordmark{font-family:'Fraunces',serif;font-weight:700;font-size:1.15rem;color:var(--pine-dark)}
+  .wordmark span{color:var(--rust)}
+  .header-search{flex:1;max-width:360px;display:flex}
+  .header-search input{width:100%;min-height:40px;padding:0 14px;border:1px solid var(--line);border-radius:8px;background:var(--paper-raised);font-family:inherit;font-size:.9rem;color:var(--ink)}
+  .header-search input::placeholder{color:var(--ink-soft)}
+  nav.top-nav{display:flex;gap:20px;align-items:center}
+  nav.top-nav a{font-size:.88rem;font-weight:600;color:var(--ink-soft)}
+  nav.top-nav a:hover{color:var(--ink)}
+  .btn-ghost{padding:8px 16px;border:1px solid var(--line);border-radius:8px;font-size:.85rem;font-weight:600}
+
+  /* layout */
+  .shell{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:220px minmax(0,1fr);gap:0;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+  aside.rail{border-right:1px solid var(--line);padding:24px 18px;align-self:start;position:sticky;top:65px}
+  .rail-group{margin-bottom:22px}
+  .rail-group h3{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);font-family:'Public Sans',sans-serif;font-weight:700;margin-bottom:8px}
+  .rail-group a{display:block;padding:6px 0;font-size:.88rem;color:var(--ink);font-weight:500}
+  .rail-group a:hover{color:var(--pine-dark)}
+  .rail-cta{display:block;padding:9px 12px;border-radius:8px;background:var(--pine);color:#fff;text-align:center;font-size:.85rem;font-weight:700;margin-top:6px}
+
+  main.content{padding:0 28px 60px}
+
+  /* hero */
+  .hero{display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px;align-items:center;padding:44px 0 40px;border-bottom:1px solid var(--line)}
+  .hero h1{font-size:clamp(2rem,4vw,2.85rem);line-height:1.08;font-weight:600;max-width:16ch}
+  .hero svg{width:100%;height:auto;border-radius:var(--radius);background:var(--paper-raised);border:1px solid var(--line)}
+
+  /* section head */
+  .section{padding:36px 0;border-bottom:1px solid var(--line)}
+  .section:last-child{border-bottom:none}
+  .section-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px}
+  .section-head h2{font-size:1.3rem;font-weight:600}
+
+  /* level cards */
+  .level-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .level-card{background:var(--card-color);color:#fff;padding:18px 16px;display:flex;flex-direction:column;gap:34px;min-height:130px}
+  .level-card .kicker{font-family:'Fraunces',serif;font-weight:600;font-size:1.1rem}
+  .level-card p{margin:0;font-size:.85rem;opacity:.9}
+  .level-card .cta{font-size:.8rem;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
+  /* type cards */
+  .type-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .type-card{border:1px solid var(--line);border-radius:var(--radius);background:var(--paper-raised);padding:18px 16px;display:flex;flex-direction:column;gap:26px;min-height:120px}
+  .type-card .kicker{font-weight:700;font-size:.95rem}
+  .type-card p{margin:0;font-size:.83rem;color:var(--ink-soft)}
+  .type-card .cta{font-size:.8rem;font-weight:700;color:var(--pine-dark)}
+
+  /* featured grid */
+  .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .feature-card{border:1px solid var(--line);border-radius:var(--radius);background:var(--paper-raised);overflow:hidden;display:flex;flex-direction:column}
+  .feature-card__art{aspect-ratio:16/10}
+  .feature-card__art svg{width:100%;height:100%;display:block}
+  .feature-card__body{padding:14px 16px 18px;display:flex;flex-direction:column;gap:8px}
+  .badge-row{display:flex;gap:8px}
+  .badge{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em}
+  .badge.level{color:var(--pine-dark)}
+  .badge.type{color:var(--ink-soft)}
+  .feature-card h3{font-size:1.05rem;font-weight:600;line-height:1.2}
+  .feature-card p{margin:0;font-size:.87rem;color:var(--ink-soft);line-height:1.4}
+
+  /* recent list */
+  .recent-list{display:grid}
+  .recent-item{display:grid;grid-template-columns:90px 1fr auto;gap:14px;align-items:center;padding:13px 4px;border-bottom:1px dashed var(--line)}
+  .recent-item:last-child{border-bottom:none}
+  .recent-item time{font-size:.78rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase}
+  .recent-item strong{font-family:'Fraunces',serif;font-weight:600;font-size:1rem}
+  .recent-item .meta{font-size:.78rem;color:var(--ink-soft)}
+  .recent-item:hover strong{color:var(--pine-dark)}
+
+  /* access card */
+  .access-card{background:#E4EFE9;border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .access-card h2{font-size:1.15rem;margin-bottom:8px}
+  .access-card p{margin:0;font-size:.92rem;color:var(--ink-soft);line-height:1.5}
+  .access-card a{font-weight:700;color:var(--pine-dark);text-decoration:underline;text-underline-offset:3px}
+
+  footer{border-top:1px solid var(--line);margin-top:12px}
+  .footer-inner{max-width:1280px;margin:0 auto;padding:22px 24px;display:flex;flex-wrap:wrap;gap:18px}
+  .footer-inner a{font-size:.83rem;color:var(--ink-soft)}
+  .footer-inner a:hover{color:var(--ink)}
+
+  @media (max-width: 980px){
+    .shell{grid-template-columns:1fr}
+    aside.rail{display:none}
+    .hero{grid-template-columns:1fr}
+    .level-grid,.type-grid{grid-template-columns:repeat(2,1fr)}
+    .feature-grid{grid-template-columns:repeat(2,1fr)}
+    .recent-item{grid-template-columns:70px 1fr}
+    .recent-item .meta{grid-column:2}
+  }
+  @media (max-width: 560px){
+    .level-grid,.type-grid,.feature-grid{grid-template-columns:1fr}
+    .header-search{display:none}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Pular para o conteúdo</a>
+
+<header>
+  <div class="header-inner">
+    <a class="wordmark" href="#">Português<span>+</span></a>
+    <form class="header-search" role="search">
+      <label class="skip-link" for="q">Buscar lições</label>
+      <input id="q" type="search" placeholder="Buscar lições…">
+    </form>
+    <nav class="top-nav" aria-label="Principal">
+      <a href="#">Sobre</a>
+      <a href="#" class="btn-ghost">Entrar</a>
+    </nav>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Navegar por lições">
+    <div class="rail-group">
+      <a href="#">Todas as Lições (184)</a>
+    </div>
+    <div class="rail-group">
+      <h3>Por nível</h3>
+      <a href="#">Nível 1 (18)</a>
+      <a href="#">Nível 2 (41)</a>
+      <a href="#">Nível 3 (56)</a>
+      <a href="#">Nível 4 (69)</a>
+    </div>
+    <div class="rail-group">
+      <h3>Por tipo</h3>
+      <a href="#">Artigos (128)</a>
+      <a href="#">Publicações Sociais (14)</a>
+      <a href="#">Resenhas (16)</a>
+      <a href="#">Explicadores (26)</a>
+    </div>
+    <div class="rail-group">
+      <a class="rail-cta" href="#">Assinar por e-mail</a>
+      <a href="#">Assinatura Português+</a>
+    </div>
+    <div class="rail-group">
+      <h3>Recursos</h3>
+      <a href="#">Guia do Aluno</a>
+      <a href="#">Planos de Aula (Professores)</a>
+    </div>
+  </aside>
+
+  <main class="content" id="main">
+    <section class="hero">
+      <h1 style="text-align: center;">Uma biblioteca crescente de lições de português do Brasil, separadas por nível.</h1>
+     <div>
+        <img src="img/praia_home.jpg" width="600"/>
+     </div>
+    </section>
+
+    <section class="section" aria-labelledby="h-niveis">
+      <div class="section-head"><h2 id="h-niveis">Comece pelo Nível</h2></div>
+      <div class="level-grid">
+        <a class="level-card" style="--card-color:var(--pine)" href="#">
+          <span class="kicker">Nível 1</span>
+          <div>
+            <p>Textos curtos. Frases simples.</p>
+          </div>
+          <span class="cta">Ver lições do Nível 1</span>
+        </a>
+        <a class="level-card" style="--card-color:var(--rust)" href="#">
+          <span class="kicker">Nível 2</span>
+          <div><p>Temas familiares. Mais detalhes.</p></div>
+          <span class="cta">Ver lições do Nível 2</span>
+        </a>
+        <a class="level-card" style="--card-color:var(--ochre)" href="#">
+          <span class="kicker">Nível 3</span>
+          <div><p>Histórias mais longas. Fraseado mais natural.</p></div>
+          <span class="cta">Ver lições do Nível 3</span>
+        </a>
+        <a class="level-card" style="--card-color:var(--slate)" href="#">
+          <span class="kicker">Nível 4</span>
+          <div><p>Temas mais densos. Vocabulário mais rico.</p></div>
+          <span class="cta">Ver lições do Nível 4</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="h-tipos">
+      <div class="section-head"><h2 id="h-tipos">Comece pelo Tipo de Lição</h2></div>
+      <div class="type-grid">
+        <a class="type-card" href="#">
+          <span class="kicker">Artigos</span>
+          <p>Lições baseadas em notícias, sobre eventos, questões e como as pessoas reagem.</p>
+          <span class="cta">Ver Artigos →</span>
+        </a>
+        <a class="type-card" href="#">
+          <span class="kicker">Publicações Sociais</span>
+          <p>Lições construídas em torno de situações pessoais e narrativas em primeira pessoa.</p>
+          <span class="cta">Ver Publicações →</span>
+        </a>
+        <a class="type-card" href="#">
+          <span class="kicker">Resenhas</span>
+          <p>Lições baseadas em avaliações e opiniões sobre livros, filmes, produtos etc.</p>
+          <span class="cta">Ver Resenhas →</span>
+        </a>
+        <a class="type-card" href="#">
+          <span class="kicker">Explicadores</span>
+          <p>Lições mais fáceis que explicam algo, um lugar, sistema, processo ou ideia.</p>
+          <span class="cta">Ver Explicadores →</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="h-destaque">
+      <div class="section-head"><h2 id="h-destaque">Lições em Destaque</h2></div>
+      <div class="feature-grid">
+        <a class="feature-card" href="#">
+          <div class="feature-card__art"><svg viewBox="0 0 300 190"><rect width="300" height="190" fill="#F3EBDD"/><circle cx="150" cy="95" r="55" fill="var(--ochre)"/></svg></div>
+          <div class="feature-card__body">
+            <div class="badge-row"><span class="badge level">Nível 2</span><span class="badge type">Artigo</span></div>
+            <h3>Frutas Que Ajudam a Dormir Melhor</h3>
+            <p>Sobre pesquisas que mostram se comer frutas à noite pode ajudar no sono.</p>
+          </div>
+        </a>
+        <a class="feature-card" href="#">
+          <div class="feature-card__art"><svg viewBox="0 0 300 190"><rect width="300" height="190" fill="#EFF3F0"/><rect x="90" y="55" width="120" height="80" rx="12" fill="var(--pine)"/></svg></div>
+          <div class="feature-card__body">
+            <div class="badge-row"><span class="badge level">Nível 1</span><span class="badge type">Explicador</span></div>
+            <h3>O Que É uma Feijoada?</h3>
+            <p>Sobre os ingredientes da feijoada e por que as pessoas comem esse prato aos sábados.</p>
+          </div>
+        </a>
+        <a class="feature-card" href="#">
+          <div class="feature-card__art"><svg viewBox="0 0 300 190"><rect width="300" height="190" fill="#F6ECE9"/><path d="M150 60 L190 110 L150 100 L110 110 Z" fill="var(--rust)"/></svg></div>
+          <div class="feature-card__body">
+            <div class="badge-row"><span class="badge level">Nível 2</span><span class="badge type">Artigo</span></div>
+            <h3>Coração Partido Também Dói no Corpo</h3>
+            <p>Sobre a síndrome do coração partido e por que ela também afeta mais os homens.</p>
+          </div>
+        </a>
+        <a class="feature-card" href="#">
+          <div class="feature-card__art"><svg viewBox="0 0 300 190"><rect width="300" height="190" fill="#EEF1F4"/><rect x="70" y="40" width="160" height="110" rx="10" fill="var(--slate)"/></svg></div>
+          <div class="feature-card__body">
+            <div class="badge-row"><span class="badge level">Nível 2</span><span class="badge type">Publicação Social</span></div>
+            <h3>Encontrei Mensagens Antigas</h3>
+            <p>Sobre mensagens antigas, confiança num relacionamento e o que conta como traição.</p>
+          </div>
+        </a>
+        <a class="feature-card" href="#">
+          <div class="feature-card__art"><svg viewBox="0 0 300 190"><rect width="300" height="190" fill="#F3EBDD"/><polygon points="150,40 210,150 90,150" fill="var(--ochre)"/></svg></div>
+          <div class="feature-card__body">
+            <div class="badge-row"><span class="badge level">Nível 4</span><span class="badge type">Artigo</span></div>
+            <h3>Novo Trem-Bala Liga Duas Capitais</h3>
+            <p>Sobre o novo trem de alta velocidade, seu custo e o que ele muda para os passageiros.</p>
+          </div>
+        </a>
+        <a class="feature-card" href="#">
+          <div class="feature-card__art"><svg viewBox="0 0 300 190"><rect width="300" height="190" fill="#EFF3F0"/><circle cx="120" cy="95" r="40" fill="var(--pine)"/><circle cx="190" cy="95" r="26" fill="var(--rust)"/></svg></div>
+          <div class="feature-card__body">
+            <div class="badge-row"><span class="badge level">Nível 2</span><span class="badge type">Resenha</span></div>
+            <h3>Resenha: Novo Álbum de Forró</h3>
+            <p>Sobre o novo álbum, seus pontos fortes e os momentos mais fracos.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="h-recentes">
+      <div class="section-head"><h2 id="h-recentes">Adicionadas Recentemente</h2></div>
+      <div class="recent-list">
+        <a class="recent-item" href="#">
+          <time>8 set 2026</time>
+          <strong>Resenha: Kia EV5</strong>
+          <span class="meta">Nível 4 · Resenha · 298 palavras · Voz: Brasileira, Masculina</span>
+        </a>
+        <a class="recent-item" href="#">
+          <time>7 set 2026</time>
+          <strong>Chuva de Cerveja em Salvador</strong>
+          <span class="meta">Nível 2 · Artigo · 172 palavras · Voz: Brasileira, Feminina</span>
+        </a>
+        <a class="recent-item" href="#">
+          <time>6 set 2026</time>
+          <strong>Redução de Velocidade nas Ruas de Lisboa</strong>
+          <span class="meta">Nível 2 · Artigo · 180 palavras · Voz: Portuguesa, Masculina</span>
+        </a>
+        <a class="recent-item" href="#">
+          <time>4 set 2026</time>
+          <strong>Óculos Inteligentes e Cola em Provas</strong>
+          <span class="meta">Nível 3 · Artigo · 230 palavras · Voz: Brasileira, Feminina</span>
+        </a>
+        <a class="recent-item" href="#">
+          <time>2 set 2026</time>
+          <strong>Ataque de Tubarão em Fernando de Noronha</strong>
+          <span class="meta">Nível 3 · Artigo · 210 palavras · Voz: Brasileira, Masculina</span>
+        </a>
+        <a class="recent-item" href="#">
+          <time>1 set 2026</time>
+          <strong>Por Que Empresas Japonesas Olham Para o Brasil</strong>
+          <span class="meta">Nível 4 · Artigo · 220 palavras · Voz: Portuguesa, Masculina</span>
+        </a>
+        <a class="recent-item" href="#">
+          <time>31 ago 2026</time>
+          <strong>Arrependimento de Tatuagem</strong>
+          <span class="meta">Nível 3 · Publicação Social · 228 palavras · Voz: Brasileira, Masculina</span>
+        </a>
+        <a class="recent-item" href="#">
+          <time>29 ago 2026</time>
+          <strong>O Que É um Uniforme?</strong>
+          <span class="meta">Nível 1 · Explicador · 133 palavras · Voz: Brasileira, Feminina</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="h-acesso" style="border-bottom:none">
+      <article class="access-card">
+        <h2 id="h-acesso">Acesso Sem Anúncios + PDFs de Lição</h2>
+        <p>Use a Português+ sem anúncios e baixe PDFs de lição prontos para uso em sala de aula. <a href="#">Ver opções de assinatura</a></p>
+      </article>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="#">Contato</a>
+    <a href="#">Editorial</a>
+    <a href="#">Privacidade</a>
+    <a href="#">Termos</a>
+    <a href="#">Facebook</a>
+    <a href="#">YouTube</a>
+  </div>
+</footer>
+</body>
+</html>
